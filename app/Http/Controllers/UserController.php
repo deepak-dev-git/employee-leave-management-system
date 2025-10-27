@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::pluck('name', 'name'); // ['admin' => 'admin', 'user' => 'user']
+        $roles = Role::pluck('name', 'name');
         return view('users.create_update', compact('roles'));
     }
 
@@ -44,6 +44,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'type' => $request->role,
             'password' => bcrypt($request->password),
             'pass' => $request->password,
             'status' => $request->status ?? 0,
@@ -81,8 +82,9 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'type' => $request->role,
             'password' => $request->password ? bcrypt($request->password) : $user->password,
-            'pass' => $request->password ? bcrypt($request->password) : $user->password,
+            'pass' => $request->password ? $request->password : $user->password,
             'status' => $request->status ?? 0,
         ]);
 

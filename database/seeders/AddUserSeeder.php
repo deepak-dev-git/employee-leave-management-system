@@ -20,7 +20,6 @@ class AddUserSeeder extends Seeder
                 'type' => UserType::ADMIN,
                 'email' => 'admin@gmail.com',
                 'status' => true,
-                'image' => 'avatar.jpg',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'pass' => 'password',
